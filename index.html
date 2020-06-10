@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SVG ANIMATION </title>
+    <link rel="stylesheeet" href="./style.css" >
+    <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <style>
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+.polymorph {
+   fill:#2476ED;
+}
+
+#cta, #cta2 {
+    position: absolute;
+    margin: 10em, auto, 0, auto;
+    left: 0;
+    right: 0;
+    width: 30%;
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    padding: 15px;
+    color: #fff;
+    font-size: 1.5em;
+    cursor:pointer;
+    outline: 0;
+}
+.lines {
+    font-size: 60px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+p { 
+    font-size: 1.2em;
+}
+#cta {
+    width: auto;
+    background: transparent;
+    position: absolute;
+    top: 40%;
+    left:40%;
+}
+
+#cta2 {
+    width: auto;
+    margin: 30px auto;
+    background: #29ABE2;
+}
+
+#blip {
+    position: absolute;
+    color: #29ABE2;
+    right: 25%;
+    top: 0;
+    opacity: 0;
+    width: 30%;
+    transform: translateY(-800px);
+}
+    </style>
+</head>
+
+
+<body>
+ 
+    <button  id="cta"> Click me <br>
+        <h2> Anime.JS </h2> </button>
+
+
+    <div id="blip">
+        <h1 class="lines"> ANIME. JS </h1>
+        <h1 class="path"> Well that was revealing...</h1>
+        <p>Isn't this cool? Here a little more text to fill in the svg animation.. </p> 
+        <p class="el"> Anime is awesome</p>
+        <p class="el">Fast & Easy </p>
+        <p class="el"> Coolll ASFF</p>
+
+        <button  id="cta2"> Go back </button>
+    </div>
+    <?xml version="1.0" encoding="utf-8"?>
+    <!-- Generator: Adobe Illustrator 24.1.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+    <svg viewBox="0 0 210 100" style="enable-background:new 0 0 210 100;" xml:space="preserve">
+        <style type="text/css">
+            .st0{fill:#2476ED;}
+        </style>
+        <polygon class="polymorph" points="210,100 0,100 0,0 39,0 210,0 	"/>
+  
+    </svg>
+    
+
+
+<!-- MORPHING SVG IN ANIME.JS -->
+<script>
+
+var btn = document.getElementById('cta');
+var btn2 = document.getElementById('cta2');
+
+btn.onclick = function() {
+ var morphing = anime({
+    targets: '.polymorph',
+    points: [
+        { value: '255,110 0,110 0,0 47.7,0 67,76' },
+        { value: '210,100 0,100 0,0 0,0 64,73' },
+    ],
+
+    easing: 'easeOutQuad',
+    duration: 1200,
+    loop: false
+    });
+
+
+    anime({
+        targets: '#blip',
+        opacity: 1,
+        duration: 500,
+        translateY: 150
+    })
+
+    var promise = morphing.finished.then(() => {
+        btn2.onclick = function() {
+            var morphing = anime({
+                targets: '.polymorph',
+                points: [
+                    { value: '210,100 0,100 0,0 0,0 64,73' },
+                    { value: '215,110 0,110 0,0 47.7,0 67,76' },
+                    { value: '210,100 0,100 0,0 0,0 210,0 '}
+                ],
+                easing: 'easeOutQuad',
+                duration: 1200,
+                loop: false
+             });  
+             
+                anime({
+                targets: '#blip',
+                opacity: 0,
+                duration: 500,
+                translateY: -800
+            })
+
+            anime({
+            targets: '.lines',
+            translateY: -100,
+            direction: 'alternate',
+            loop: true,
+            easing: 'linear'
+            });
+
+        }
+    });
+
+}
+
+
+
+</script>
+
+
+
+
+    <script src="app.js"></script>
+</body>
+</html>
+
+
+
+
